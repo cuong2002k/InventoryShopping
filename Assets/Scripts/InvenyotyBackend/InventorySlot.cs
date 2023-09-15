@@ -24,6 +24,21 @@ public class InventorySlot
         this.stackSize = -1;
     }
 
+    public void AssignInventory(InventorySlot invSlot)
+    {
+        if (invSlot.item == item) // check type item => + stack
+        {
+            this.AddToStack(invSlot.stackSize);
+
+        }
+        else
+        {
+            this.item = invSlot.item;
+            stackSize = 0;
+            AddToStack(invSlot.stackSize);
+        }
+    }
+
     public void UpdateToInventorySlot(Item item, int stackSize)
     {
         this.item = item;
@@ -40,14 +55,29 @@ public class InventorySlot
         this.stackSize -= stackSize;
     }
 
-    public bool RoomLeftToStack(int stackSize)
+    public bool RoomLeftToStack(int amountToAdd)
     {
-        return (this.stackSize + stackSize <= item.maxStack);
+        return (this.stackSize + amountToAdd <= item.maxStack);
     }
 
-    public bool RoomLeftToStack(int stackSize, out int amountMaining)
+    public bool RoomLeftToStack(int amountToAdd, out int amountMaining)
     {
         amountMaining = item.maxStack - stackSize;
-        return RoomLeftToStack(amountMaining);
+        return RoomLeftToStack(amountToAdd);
+    }
+
+    public bool SplitStack(out InventorySlot splitStack)
+    {
+        if(this.stackSize <= 1)
+        {
+            splitStack = null;
+            return false;
+        }
+
+        int halfStack = Mathf.RoundToInt(this.stackSize/2);
+        this.RemoveFromStack(halfStack);
+        splitStack = new InventorySlot(this.item, halfStack);
+        return true;
+
     }
 }

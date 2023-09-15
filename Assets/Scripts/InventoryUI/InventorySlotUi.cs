@@ -21,7 +21,7 @@ public class InventorySlotUi : MonoBehaviour
     {
         ClearUISlot();
         button = GetComponent<Button>();
-        button?.onClick.AddListener(OnUISlotClick);
+        button?.onClick.AddListener(OnUISlotClick);/// register event button
 
         parrentDisplay = this.transform.parent.GetComponent<InventoryDisplay>();
     }
@@ -57,7 +57,7 @@ public class InventorySlotUi : MonoBehaviour
         if (assignInventorySlot != null) UpdateUISlot(assignInventorySlot);
     }
 
-    private void ClearUISlot()
+    public void ClearUISlot()
     {
         assignInventorySlot?.ClearSlot();
         inventoryIcon.sprite = null;
@@ -68,7 +68,7 @@ public class InventorySlotUi : MonoBehaviour
     // register event button click
     private void OnUISlotClick()
     {
-        this.parrentDisplay?.ClickedSlot(this);
+        this.parrentDisplay?.SlotClicked(this);
     }
 
 

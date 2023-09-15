@@ -15,5 +15,5 @@ MonoBehaviour:
   id: 1
   icon: {fileID: -4965553739594148211, guid: ea86097f05587774ea54682ab5db50a0, type: 3}
   displayName: Tomato
-  maxStack: 2
+  maxStack: 3
   description: this is a tomato
